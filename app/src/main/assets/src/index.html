@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+{% block isi %}
+<section class="wadah">
+	<h1>My Tasks</h1>
+	<ol class="app" v-cloak>
+		<li v-for='x in Array(20)'>Makan nasi</li>
+	</ol>
+</section>
+<script>
+PetiteVue.createApp({
+
+}).mount('.app')
+</script>
+<style lang="windi">
+[v-cloak] {
+	@apply hidden
+}
+
+.wadah {
+	@apply p-5 px-8
+}
+
+.app li {
+	@apply px-2 py-2
+}
+
+.terpilih {
+	@apply first: (bg-black text-white)
+}
+
+.wadah h1 {
+	@apply text-center text-3xl pb-5
+}
+</style>
+{% endblock %}
