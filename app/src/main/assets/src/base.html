@@ -5,11 +5,23 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Document</title>
-	<script src='petite-vue.iife.js'></script>
+	<script src="petite-vue.iife.js"></script>
 </head>
 
 <body>
 	{% block isi %}{% endblock %}
+	<a class="tombol kiri" href="https://play.google.com/store/apps/details?id=com.mzaini30.mytasks">
+		{% include './icon/love.html' %}
+	</a>
 </body>
 
 </html>
+<style lang="windi">
+.tombol {
+	@apply fixed bottom-0 p-2 text-3xl
+}
+
+.tombol.kiri {
+	@apply left-0
+}
+</style>
