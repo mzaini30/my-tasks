@@ -1,6 +1,6 @@
 {% extends './base.html' %}
 {% block isi %}
-<section class="wadah" v-cloak @vue:mounted='cek'>
+<section class="wadah" @vue:mounted='cek'>
 	<h1>Edit Tasks</h1>
 	<form action="" @submit.prevent='simpan'>
 		<textarea name="" required id="" cols="30" rows="10" placeholder="first task
@@ -19,7 +19,7 @@ PetiteVue.createApp({
 	},
 	simpan() {
 		localStorage.tasks_teks = this.tasks_teks
-		localStorage.tasks_list = JSON.stringify(this.tasks_teks.split('\n').filter(x => x))
+		localStorage.tasks_list = JSON.stringify(this.tasks_teks.split('\n').filter(x => x).map(x => x.replace(/^\- /, '')))
 		location.href = 'index.html'
 	}
 }).mount('.wadah')

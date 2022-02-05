@@ -2,7 +2,7 @@
 {% block isi %}
 <section class="wadah">
 	<h1>My Tasks</h1>
-	<ol class="app" v-cloak @vue:mounted='cek'>
+	<ol class="app" @vue:mounted='cek'>
 		<li v-for='(x, n) in list' :class='n == nilai ? "terpilih" : ""'>{{ x }}</li>
 	</ol>
 </section>
