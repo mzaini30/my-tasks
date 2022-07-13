@@ -3,11 +3,20 @@ import { ref } from "vue";
 import Pensil from "../icon/pensil.vue";
 import Info from "../komponen/info.vue";
 
+const { stringify, parse } = JSON;
+
 const list = ref([]);
 const nilai = ref(0);
 
+function sekarang(): string {
+  const tanggalan = new Date();
+  const tanggal = tanggalan.getDate();
+  const bulan = tanggalan.getMonth() + 1;
+  return `${tanggal}/${bulan}`;
+}
+
 if (localStorage.tasksList) {
-  list.value = JSON.parse(localStorage.tasksList);
+  list.value = parse(localStorage.tasksList);
 
   let tanggalan = new Date();
   let tanggalSekarang = tanggalan.getDate();
@@ -18,6 +27,22 @@ if (localStorage.tasksList) {
   } else {
     nilai.value = banyakList % tanggalSekarang;
   }
+
+  if (localStorage.aktif) {
+    const aktif = parse(localStorage.aktif);
+    if (aktif.tanggal === sekarang()) {
+      nilai.value = aktif.posisi;
+    }
+  }
+}
+
+function ubah(n: number) {
+  nilai.value = n;
+
+  localStorage.aktif = stringify({
+    tanggal: sekarang(),
+    posisi: n,
+  });
 }
 </script>
 
@@ -26,7 +51,12 @@ if (localStorage.tasksList) {
   <section class="wadah">
     <h1>My Tasks</h1>
     <ol class="app">
-      <li v-for="(x, n) in list" :class="n == nilai ? 'terpilih' : ''">
+      <li
+        v-for="(x, n) in list"
+        class="cursor-pointer select-none"
+        @click="ubah(n)"
+        :class="n == nilai ? 'terpilih' : ''"
+      >
         {{ x }}
       </li>
     </ol>
